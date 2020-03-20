@@ -12,10 +12,14 @@ import {CartContext} from "./contexts/CartContext"
 function App() {
 	const [products] = useState(data);
 	const [cart, setCart] = useState([]);
-	console.log("artt", cart);
 	const addItem = item => {
 		// add the given item to the cart
 		setCart([...cart,item]);
+	};
+	const removeItem = item => {
+		// add the given item to the cart
+		console.log("removing", cart)
+		setCart(cart.filter(elemt=>elemt.id!==item.id));
 	};
 
 	return (
@@ -30,7 +34,7 @@ function App() {
 				</Route>
 
 				<Route path="/cart">
-					<CartContext.Provider value={cart}>
+					<CartContext.Provider value={{cart, removeItem}}>
 						<ShoppingCart/>
 					</CartContext.Provider>
 				</Route>
